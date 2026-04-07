@@ -1,0 +1,3 @@
+{
+  "!(public)/**/*": ["oxlint --fix", "prettier --write --ignore-unknown"]
+}

@@ -1,0 +1,58 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-04-02 18:23+0800\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: zh\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: app/routes/home.tsx:39
+msgid "A modern, production-ready framework for building full-stack React applications"
+msgstr "一个现代化的、生产级全栈 React 应用框架"
+
+#: app/routes/home.tsx:114
+msgid "Built with React Router 7, TailwindCSS, and Lingui"
+msgstr "基于 React Router 7、TailwindCSS 和 Lingui 构建"
+
+#: app/routes/home.tsx:76
+msgid "Fast"
+msgstr "快速"
+
+#: app/routes/home.tsx:52
+msgid "Internationalization Ready"
+msgstr "国际化支持"
+
+#: app/routes/home.tsx:79
+msgid "Optimized for performance"
+msgstr "性能优化"
+
+#: app/routes/home.tsx:92
+msgid "Production-ready security"
+msgstr "生产级安全保障"
+
+#: app/routes/home.tsx:102
+msgid "Responsive"
+msgstr "响应式"
+
+#: app/routes/home.tsx:55
+msgid "Seamlessly switch between languages with built-in i18n support"
+msgstr "内置 i18n 支持，无缝切换语言"
+
+#: app/routes/home.tsx:89
+msgid "Secure"
+msgstr "安全"
+
+#: app/routes/home.tsx:36
+msgid "Welcome to React Router"
+msgstr "欢迎使用 React Router"
+
+#: app/routes/home.tsx:105
+msgid "Works on all devices"
+msgstr "适配所有设备"

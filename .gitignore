@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+build/
+dist/
+
+# React Router
+.react-router/
+
+# Test coverage
+coverage/
+
+# Development
+.vite/
+.sisyphus/
+
+# Husky internal
+.husky/_/
+
+# Environment variables - NEVER commit secrets
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

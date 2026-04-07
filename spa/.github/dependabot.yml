@@ -1,0 +1,142 @@
+version: 2
+
+updates:
+  # GitHub Actions dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Shanghai"
+    commit-message:
+      prefix: "ci"
+    open-pull-requests-limit: 5
+    groups:
+      actions:
+        patterns:
+          - "*"
+    labels:
+      - "dependencies"
+      - "github-actions"
+      - "automated"
+
+  # npm dependencies (pnpm)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Shanghai"
+
+    # Commit message conventions
+    commit-message:
+      prefix: "deps"
+      prefix-development: "deps-dev"
+
+    # Limit open PRs
+    open-pull-requests-limit: 10
+
+    # Cooldown periods for stability
+    cooldown:
+      default-days: 7
+      semver-major-days: 30
+      semver-minor-days: 7
+
+    # Dependency grouping strategies
+    groups:
+      # React Router 7 ecosystem - must stay version-aligned
+      react-router-7:
+        patterns:
+          - "react-router"
+          - "@react-router/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+      # React core - minor/patch only
+      react-core:
+        patterns:
+          - "react"
+          - "react-dom"
+        update-types:
+          - "minor"
+          - "patch"
+
+      # Lingui ecosystem
+      lingui-ecosystem:
+        patterns:
+          - "@lingui/*"
+
+      # Development tools - ESLint
+      dev-tools-eslint:
+        patterns:
+          - "eslint"
+          - "eslint-*"
+          - "@eslint/*"
+          - "eslint-plugin-*"
+        dependency-type: "development"
+
+      # Development tools - TypeScript
+      dev-tools-types:
+        patterns:
+          - "typescript"
+          - "typescript-eslint"
+          - "@types/*"
+        dependency-type: "development"
+
+      # Development tools - Vite build tools
+      dev-tools-vite:
+        patterns:
+          - "vite"
+          - "vite-*"
+          - "@tailwindcss/*"
+          - "tailwindcss"
+        dependency-type: "development"
+
+    # Ignore major version updates for manual review
+    ignore:
+      # React core - major needs migration review
+      - dependency-name: "react"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "react-dom"
+        update-types:
+          - "version-update:semver-major"
+
+      # React Router 7 - major may require framework migration
+      - dependency-name: "react-router"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "@react-router/*"
+        update-types:
+          - "version-update:semver-major"
+
+      # Lingui - major API changes possible
+      - dependency-name: "@lingui/*"
+        update-types:
+          - "version-update:semver-major"
+
+      # Dev tools - major may break configs
+      - dependency-name: "eslint"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "typescript"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "typescript-eslint"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "vite"
+        update-types:
+          - "version-update:semver-major"
+
+    # Labels for PR filtering
+    labels:
+      - "dependencies"
+      - "npm"
+      - "automated"
+
+    # Versioning strategy for lockfile
+    versioning-strategy: "increase-if-necessary"
