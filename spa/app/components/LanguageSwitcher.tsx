@@ -1,13 +1,10 @@
-import { useState, useEffect } from "react";
-import {
-  detectLocaleClient,
-  setStoredLocale,
-  activateLocale,
-} from "~/lib/i18n/i18n.client";
+import { useEffect, useState } from "react";
+import { useLang } from "~/context/lang-provider";
 import { localeNames, supportedLocales, type Locale } from "~/lib/i18n/config";
+import { activateLocale, setStoredLocale } from "~/lib/i18n/i18n.client";
 
 export function LanguageSwitcher() {
-  const [locale, setLocale] = useState<Locale>(() => detectLocaleClient());
+  const { lang, setLang } = useLang();
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -22,7 +19,8 @@ export function LanguageSwitcher() {
     try {
       setStoredLocale(newLocale);
       await activateLocale(newLocale);
-      setLocale(newLocale);
+
+      setLang(newLocale);
       setError(null);
     } catch (error: unknown) {
       const message =
@@ -44,9 +42,9 @@ export function LanguageSwitcher() {
             key={loc}
             onClick={() => handleLanguageChange(loc)}
             aria-label={`Switch to ${localeNames[loc]}`}
-            aria-pressed={locale === loc}
+            aria-pressed={lang === loc}
             className={`cursor-pointer rounded-md px-3 py-1.5 text-sm font-medium transition-all duration-200 ${
-              locale === loc
+              lang === loc
                 ? "bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-100"
                 : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
             }`}

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   isRouteErrorResponse,
   Links,
@@ -5,11 +6,10 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useRouteLoaderData,
 } from "react-router";
 import type { Route } from "./+types/root";
-import { detectLocaleClient } from "./lib/i18n/i18n.client";
 import "./app.css";
+import { LangProvider } from "./context/lang-provider";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -24,19 +24,11 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
-export function clientLoader() {
-  const locale = detectLocaleClient();
-  return { locale };
-}
-
-export type RootLoaderData = typeof clientLoader;
-
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { locale } = useRouteLoaderData<RootLoaderData>("root") ?? {
-    locale: "en",
-  };
+  const [lang, setLang] = useState<string>();
+
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={lang}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -44,7 +36,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <LangProvider lang={lang} onLangChange={setLang}>
+          {children}
+        </LangProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
